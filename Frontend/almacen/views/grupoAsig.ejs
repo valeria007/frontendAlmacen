@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hospital</title>
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+<!--head-->
+<%- include("partials/head") -%>
+</head>
+<body class="light_theme  fixed_header left_nav_fixed">
+<div class="wrapper">
+<!--Menu-->
+<%- include("partials/menu") -%>
+    <!--\\\\\\\left_nav end \\\\\\-->
+    <div class="contentpanel">
+      <!--\\\\\\\ contentpanel start\\\\\\-->
+      <div class="pull-left breadcrumb_admin clear_both">
+        <div class="pull-left page_title theme_color">
+          <h1>Grupo de Asignacion</h1>
+        </div>
+        <div class="pull-right">
+          <ol class="breadcrumb">
+            <li><a href="#">ALMACEN</a></li>
+            <li><a href="#">Grupo de Asignacion</a></li>
+          </ol>
+        </div>
+      </div>
+      <!--Formulario-->
+      <div class="container clear_both padding_fix">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="block-web">
+              <div class="header">
+                <div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a> <a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>
+                <h3 class="content-header">Nuevo</h3>
+              </div>
+              <div class="porlets-content">
+              <%if (oneGrupoAsig == null) { %>
+              <form  class="form-horizontal group-border-dashed" action="/grupoAsig" method="POST" parsley-validate novalidate>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Codigo</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" required parsley-minlength="3"  name="codigo" />
+                  </div>
+                </div><!--/form-group--> 
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Descripcion</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" required parsley-minlength="6" name="descripcion" />
+                  </div>
+                </div><!--/form-group--> 
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-times"></i>  Guardar</button>
+                    <button class="btn btn-default"><i class="fa fa-floppy-o"></i> Cancelar</button>
+                  </div>
+                </div><!--/form-group--> 
+              </form>
+              <% } else { %>
+              <form class="form-horizontal group-border-dashed" action="/updateGPA/<%=oneGrupoAsig[0].id%>" method="POST" parsley-validate novalidate>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Codigo</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" value="<%=oneGrupoAsig[0].codigo%>" required parsley-minlength="3" name="codigo" />
+                  </div>
+                </div><!--/form-group--> 
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Descripcion</label>
+                  <div class="col-sm-6">
+                    <input type="text" class="form-control" value="<%=oneGrupoAsig[0].descripcion%>"  required parsley-minlength="6" name="descripcion" />
+                  </div>
+                </div><!--/form-group--> 
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-times"></i>  Guardar</button>
+                    <button class="btn btn-default"><i class="fa fa-floppy-o"></i> Cancelar</button>
+                    <a class="btn btn-success" href="/volver"><i class="fa fa-arrow-left"></i> Volver</a>
+                  </div>
+                </div>
+              </form>
+              <% } %>  
+              </div><!--/porlets-content--> 
+            </div><!--/block-web--> 
+          </div><!--/col-md-12--> 
+        </div>
+      </div>
+      <div class="container clear_both padding_fix">
+        <div id="main-content">
+          <div class="page-content">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="block-web">
+                  <div class="porlets-content">
+                    <div class="table-responsive">
+                      <table  class="display table table-bordered table-striped" id="dynamic-table">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Codigo</th>
+                            <th>Descripcion</th>
+                            <th class="hidden-phone">Modificar</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% for(var i=0; i < resp.length; i++) { %>
+                          <tr>
+                            <td><%= i+1 %></td>
+                            <td><%=resp[i].codigo%></td>
+                            <td><%=resp[i].descripcion%></td>
+                            <td class="center hidden-phone">
+                              <a class="btn btn-success" href="/GrupoAsigONLY/<%=resp[i].id%>"><i class="fa fa-refresh"></i> </a>
+                            </td>
+                            </tr>
+                          <% } %>
+                        </tbody>
+                      </table>
+                    </div><!--/table-responsive-->
+                  </div><!--/porlets-content-->
+                </div><!--/block-web--> 
+              </div><!--/col-md-12--> 
+            </div><!--/row-->
+          </div>
+        </div> 
+      </div>        
+    </div>
+  </div>
+
+    
+        
+
+
+
+<!-- sidebar chats -->
+<!--Se elimino el menu de tro lado-->
+<!-- /sidebar chats -->   
+
+<!-- /sidebar chats -->   
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Scripts-->
+<%- include("partials/scripts") -%>
+
+</body>
+</html>
